@@ -1,12 +1,13 @@
 {
   "name": "uurobo",
-  "version": "0.0.1",
+  "version": "0.0.14",
   "description": "",
+  "private": true,
   "main": "dist-cjs/index.js",
   "module": "dist-esm/index.js",
   "types": "dist-cjs/index.d.ts",
   "scripts": {
-    "test": "jest",
+    "test": "jest --watch-all",
     "build": "npm run build:esm && npm run build:cjs",
     "build:cjs": "tsc --project . --module commonjs --outDir ./dist-cjs",
     "build:esm": "tsc --project . --module es2015 --outDir ./dist-esm"
