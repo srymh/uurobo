@@ -12,7 +12,7 @@ export declare type getProductRecipesOptions = {
 };
 export declare function getProductRecipes(product: Product, options?: getProductRecipesOptions): {
     standard: StandardProductRecipe[] | null;
-    guranteed: GuaranteedProductRecipe | null;
+    guranteed: GuaranteedProductRecipe[] | null;
     ball: BallProductRecipe[] | null;
 };
 export declare function getStandardProductRecipes(targetProduct: StandardProduct, onlyMinCost?: boolean): StandardProductRecipe[];

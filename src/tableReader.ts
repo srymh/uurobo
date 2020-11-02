@@ -84,7 +84,7 @@ export function getProductRecipes(
   options?: getProductRecipesOptions
 ): {
   standard: StandardProductRecipe[] | null;
-  guranteed: GuaranteedProductRecipe | null;
+  guranteed: GuaranteedProductRecipe[] | null;
   ball: BallProductRecipe[] | null;
 } {
   let onlyMinCost: boolean;
@@ -99,7 +99,7 @@ export function getProductRecipes(
   }
 
   let standard: StandardProductRecipe[] | null = null;
-  let special: GuaranteedProductRecipe | null = null;
+  let guranteed: GuaranteedProductRecipe[] | null = null;
   let ball: BallProductRecipe[] | null = null;
 
   if ((StandardProductList as ReadonlyArray<string>).includes(product)) {
@@ -110,10 +110,10 @@ export function getProductRecipes(
   }
 
   if ((GuaranteedProductList as ReadonlyArray<string>).includes(product)) {
-    const spec = guaranteedProductRecipeTable.find(
+    const spec = guaranteedProductRecipeTable.filter(
       (x) => x.product === product
     );
-    special = spec ? spec : null;
+    guranteed = spec ? spec : null;
   }
 
   if ((BallProductList as ReadonlyArray<string>).includes(product)) {
@@ -124,7 +124,7 @@ export function getProductRecipes(
 
   return {
     standard: standard,
-    guranteed: special,
+    guranteed: guranteed,
     ball: ball,
   };
 }

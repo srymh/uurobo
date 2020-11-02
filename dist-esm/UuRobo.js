@@ -169,7 +169,9 @@ var UuRobo = /** @class */ (function () {
                         if (firstIngredient_1 &&
                             guaranteedProductRecipeTable.find(function (x) { return x.triggerIngredient === firstIngredient_1; }) &&
                             thirdIngredient_1 &&
-                            guaranteedProductRecipeTable.find(function (x) { return x.triggerIngredient === thirdIngredient_1; })) {
+                            guaranteedProductRecipeTable.find(function (x) { return x.triggerIngredient === thirdIngredient_1; }) &&
+                            // 一つ目と三つ目が同じかチェック（ポイントアップはダイこうせきorヨロイこうせきなので）
+                            firstIngredient_1 === thirdIngredient_1) {
                             exceptionalItem = firstIngredient_1;
                         }
                     }
@@ -185,36 +187,32 @@ var UuRobo = /** @class */ (function () {
         }
         if (productRecipes.guranteed) {
             if (id === 0) {
-                requiredIngredients = __spreadArrays(requiredIngredients, extractIngredients({
-                    specifiedItem: productRecipes.guranteed.triggerIngredient,
+                requiredIngredients = __spreadArrays(requiredIngredients, productRecipes.guranteed.map(function (x) {
+                    return extractIngredients({ specifiedItem: x.triggerIngredient })[0];
                 }));
             }
             else if (id === 1) {
-                var firstIngredient = this.ingredients[0];
-                if (firstIngredient &&
-                    firstIngredient === productRecipes.guranteed.triggerIngredient) {
+                var firstIngredient_2 = this.ingredients[0];
+                if (firstIngredient_2 &&
+                    productRecipes.guranteed.findIndex(function (x) { return x.triggerIngredient === firstIngredient_2; }) >= 0) {
                     requiredIngredients = __spreadArrays(extractIngredients()); // any
                 }
             }
             else if (id === 2) {
-                var firstIngredient = this.ingredients[0];
-                if (firstIngredient &&
-                    firstIngredient === productRecipes.guranteed.triggerIngredient) {
-                    requiredIngredients = __spreadArrays(extractIngredients({
-                        specifiedItem: productRecipes.guranteed.triggerIngredient,
-                    }));
+                var firstIngredient_3 = this.ingredients[0];
+                if (firstIngredient_3 &&
+                    productRecipes.guranteed.findIndex(function (x) { return x.triggerIngredient === firstIngredient_3; }) >= 0) {
+                    requiredIngredients = __spreadArrays(extractIngredients({ specifiedItem: firstIngredient_3 }));
                 }
             }
             else if (id === 3) {
-                var firstIngredient = this.ingredients[0];
-                var thirdIngredient = this.ingredients[2];
-                if (firstIngredient &&
-                    firstIngredient === productRecipes.guranteed.triggerIngredient &&
-                    thirdIngredient &&
-                    thirdIngredient === productRecipes.guranteed.triggerIngredient) {
-                    requiredIngredients = __spreadArrays(extractIngredients({
-                        specifiedItem: productRecipes.guranteed.triggerIngredient,
-                    }));
+                var firstIngredient_4 = this.ingredients[0];
+                var thirdIngredient_2 = this.ingredients[2];
+                if (firstIngredient_4 &&
+                    productRecipes.guranteed.findIndex(function (x) { return x.triggerIngredient === firstIngredient_4; }) >= 0 &&
+                    thirdIngredient_2 &&
+                    productRecipes.guranteed.findIndex(function (x) { return x.triggerIngredient === thirdIngredient_2; }) >= 0) {
+                    requiredIngredients = __spreadArrays(extractIngredients({ specifiedItem: firstIngredient_4 }));
                 }
             }
         }

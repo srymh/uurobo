@@ -195,7 +195,9 @@ export class UuRobo {
               thirdIngredient &&
               guaranteedProductRecipeTable.find(
                 (x) => x.triggerIngredient === thirdIngredient
-              )
+              ) &&
+              // 一つ目と三つ目が同じかチェック（ポイントアップはダイこうせきorヨロイこうせきなので）
+              firstIngredient === thirdIngredient
             ) {
               exceptionalItem = firstIngredient;
             }
@@ -223,15 +225,17 @@ export class UuRobo {
       if (id === 0) {
         requiredIngredients = [
           ...requiredIngredients,
-          ...extractIngredients({
-            specifiedItem: productRecipes.guranteed.triggerIngredient,
+          ...productRecipes.guranteed.map((x) => {
+            return extractIngredients({specifiedItem: x.triggerIngredient})[0];
           }),
         ];
       } else if (id === 1) {
         const firstIngredient = this.ingredients[0];
         if (
           firstIngredient &&
-          firstIngredient === productRecipes.guranteed.triggerIngredient
+          productRecipes.guranteed.findIndex(
+            (x) => x.triggerIngredient === firstIngredient
+          ) >= 0
         ) {
           requiredIngredients = [...extractIngredients()]; // any
         }
@@ -239,12 +243,12 @@ export class UuRobo {
         const firstIngredient = this.ingredients[0];
         if (
           firstIngredient &&
-          firstIngredient === productRecipes.guranteed.triggerIngredient
+          productRecipes.guranteed.findIndex(
+            (x) => x.triggerIngredient === firstIngredient
+          ) >= 0
         ) {
           requiredIngredients = [
-            ...extractIngredients({
-              specifiedItem: productRecipes.guranteed.triggerIngredient,
-            }),
+            ...extractIngredients({specifiedItem: firstIngredient}),
           ];
         }
       } else if (id === 3) {
@@ -252,14 +256,16 @@ export class UuRobo {
         const thirdIngredient = this.ingredients[2];
         if (
           firstIngredient &&
-          firstIngredient === productRecipes.guranteed.triggerIngredient &&
+          productRecipes.guranteed.findIndex(
+            (x) => x.triggerIngredient === firstIngredient
+          ) >= 0 &&
           thirdIngredient &&
-          thirdIngredient === productRecipes.guranteed.triggerIngredient
+          productRecipes.guranteed.findIndex(
+            (x) => x.triggerIngredient === thirdIngredient
+          ) >= 0
         ) {
           requiredIngredients = [
-            ...extractIngredients({
-              specifiedItem: productRecipes.guranteed.triggerIngredient,
-            }),
+            ...extractIngredients({specifiedItem: firstIngredient}),
           ];
         }
       }

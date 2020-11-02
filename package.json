@@ -1,6 +1,6 @@
 {
   "name": "uurobo",
-  "version": "0.0.14",
+  "version": "0.0.16",
   "description": "",
   "private": true,
   "main": "dist-cjs/index.js",

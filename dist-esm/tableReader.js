@@ -74,14 +74,14 @@ export function getProductRecipes(product, options) {
         onlyMinCost = true;
     }
     var standard = null;
-    var special = null;
+    var guranteed = null;
     var ball = null;
     if (StandardProductList.includes(product)) {
         standard = getStandardProductRecipes(product, onlyMinCost);
     }
     if (GuaranteedProductList.includes(product)) {
-        var spec = guaranteedProductRecipeTable.find(function (x) { return x.product === product; });
-        special = spec ? spec : null;
+        var spec = guaranteedProductRecipeTable.filter(function (x) { return x.product === product; });
+        guranteed = spec ? spec : null;
     }
     if (BallProductList.includes(product)) {
         ball = ballProductRecipeTable.filter(function (x) {
@@ -90,7 +90,7 @@ export function getProductRecipes(product, options) {
     }
     return {
         standard: standard,
-        guranteed: special,
+        guranteed: guranteed,
         ball: ball,
     };
 }

@@ -31,10 +31,10 @@ describe('ウッウロボ', () => {
           ).sort((a, b) => a.rate - b.rate)
         ).toEqual(
           [
-            {name: 'モンスターボール', rate: 25},
-            {name: 'スーパーボール', rate: 25},
-            {name: 'ハイパーボール', rate: 25},
-            {name: 'クイックボール', rate: 25},
+            {name: 'モンスターボール', rate: 24.7},
+            {name: 'スーパーボール', rate: 24.7},
+            {name: 'ハイパーボール', rate: 24.7},
+            {name: 'クイックボール', rate: 24.7},
             {name: 'ムーンボール', rate: 1},
             {name: 'サファリボール', rate: 0.1},
             {name: 'コンペボール', rate: 0.1},
@@ -46,7 +46,7 @@ describe('ウッウロボ', () => {
     describe('最小コストで作る', () => {
       test('ねがいのかたまり', () => {
         const result = UuRobo.getRequiredIngredients('ねがいのかたまり');
-        expect(result.length).toBe(13058);
+        expect(result.length).toBe(13073);
       });
       test('10まんボルト', () => {
         const result = UuRobo.getRequiredIngredients('10まんボルト');
@@ -152,11 +152,11 @@ describe('ウッウロボ', () => {
 
       test('1つめの必要アイテム', () => {
         const result = uuRobo.getRequiredIngredients(1);
-        const itemStat = result?.find((x) => x.name === 'あおぼんぐり');
-        expect(itemStat?.name).toBe('あおぼんぐり');
+        const itemStat = result?.find((x) => x.name === 'きぼんぐり');
+        expect(itemStat?.name).toBe('きぼんぐり');
         expect(itemStat?.score).toBe(0);
         expect(itemStat?.type).toBe('でんき');
-        uuRobo.setIngredient(1, 'あおぼんぐり');
+        uuRobo.setIngredient(1, 'きぼんぐり');
       });
       test('2つめの必要アイテム', () => {
         const result = uuRobo.getRequiredIngredients(2);
@@ -227,6 +227,19 @@ describe('ウッウロボ', () => {
         expect(() => {
           uuRobo.setIngredient(4, 'ちいさなキノコ');
         }).toThrowError();
+      });
+
+      test('ばかぢから', () => {
+        const uuRobo = new UuRobo();
+        uuRobo.setTarget('ばかぢから');
+        uuRobo.setIngredient(1, 'ヨロイこうせき');
+        uuRobo.setIngredient(2, 'すっぱいりんご');
+        uuRobo.setIngredient(3, 'ヨロイこうせき');
+        expect(() => uuRobo.setIngredient(4, 'ヨロイこうせき')).toThrowError();
+        uuRobo.setIngredient(4, 'すっぱいりんご');
+
+        const result = uuRobo.mix();
+        expect(result[0]?.name).toBe('ばかぢから');
       });
 
       describe('「かおるキノコ」を作る', () => {
@@ -415,6 +428,55 @@ describe('ウッウロボ', () => {
           uuRobo.setIngredient(4, 'おおきなしんじゅ');
         }).toThrowError();
       });
+
+      describe('ポイントアップ', () => {
+        test('通常レシピ1', () => {
+          const uuRobo = new UuRobo();
+          uuRobo.setTarget('ポイントアップ');
+          uuRobo.setIngredient(1, 'ポイズンメモリ');
+          uuRobo.setIngredient(2, 'ポイズンメモリ');
+          uuRobo.setIngredient(3, 'ポイズンメモリ');
+          uuRobo.setIngredient(4, 'ポイズンメモリ');
+          const result = uuRobo.mix();
+          expect(result[0]?.name).toBe('ポイントアップ');
+        });
+        test('特殊レシピ1', () => {
+          const uuRobo = new UuRobo();
+          uuRobo.setTarget('ポイントアップ');
+          uuRobo.setIngredient(1, 'ダイこうせき');
+          uuRobo.setIngredient(2, 'ポイズンメモリ');
+          uuRobo.setIngredient(3, 'ダイこうせき');
+          uuRobo.setIngredient(4, 'ダイこうせき');
+          const result = uuRobo.mix();
+          expect(result[0]?.name).toBe('ポイントアップ');
+        });
+        test('特殊レシピ2', () => {
+          const uuRobo = new UuRobo();
+          uuRobo.setTarget('ポイントアップ');
+          uuRobo.setIngredient(1, 'ヨロイこうせき');
+          uuRobo.setIngredient(2, 'ポイズンメモリ');
+          uuRobo.setIngredient(3, 'ヨロイこうせき');
+          uuRobo.setIngredient(4, 'ヨロイこうせき');
+          const result = uuRobo.mix();
+          expect(result[0]?.name).toBe('ポイントアップ');
+        });
+        test('特殊レシピが混ざらないようにする1', () => {
+          const uuRobo = new UuRobo();
+          uuRobo.setTarget('ポイントアップ');
+          uuRobo.setIngredient(1, 'ヨロイこうせき');
+          uuRobo.setIngredient(2, 'ポイズンメモリ');
+          expect(() => uuRobo.setIngredient(3, 'ダイこうせき')).toThrowError();
+        });
+        test('特殊レシピが混ざらないようにする2', () => {
+          const uuRobo = new UuRobo();
+          uuRobo.setTarget('ポイントアップ');
+          uuRobo.setIngredient(1, 'ダイこうせき');
+          uuRobo.setIngredient(2, 'ポイズンメモリ');
+          expect(() =>
+            uuRobo.setIngredient(3, 'ヨロイこうせき')
+          ).toThrowError();
+        });
+      });
     });
 
     describe('とくせいカプセルの作り方を調べる', () => {
@@ -497,7 +559,7 @@ describe('ウッウロボ', () => {
         expect(product).not.toBeUndefined();
         if (product) {
           expect(product.name).toBe('モンスターボール');
-          expect(product.rate).toBeCloseTo(25);
+          expect(product.rate).toBeCloseTo(24.7);
         }
       });
 

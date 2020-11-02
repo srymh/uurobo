@@ -24,6 +24,7 @@ export var ingredientSpecTable = [
     { name: 'くろぼんぐり', type: 'あく', score: 0 },
     { name: 'ドラゴンメモリ', type: 'ドラゴン', score: 40 },
     { name: 'しんかのきせき', type: 'ドラゴン', score: 32 },
+    { name: 'ダイこうせき', type: 'ドラゴン', score: 28 },
     { name: 'いのちのたま', type: 'ドラゴン', score: 20 },
     { name: 'りゅうのキバ', type: 'ドラゴン', score: 18 },
     { name: 'りゅうのウロコ', type: 'ドラゴン', score: 18 },
@@ -41,7 +42,7 @@ export var ingredientSpecTable = [
     { name: 'かみなりのいし', type: 'でんき', score: 6 },
     { name: 'ソクノのみ', type: 'でんき', score: 4 },
     { name: 'モモンのみ', type: 'でんき', score: 2 },
-    { name: 'あおぼんぐり', type: 'でんき', score: 0 },
+    { name: 'きぼんぐり', type: 'でんき', score: 0 },
     { name: 'フェアリーメモリ', type: 'フェアリー', score: 40 },
     { name: 'ベリーアメざいく', type: 'フェアリー', score: 30 },
     { name: 'よつばアメざいく', type: 'フェアリー', score: 30 },
@@ -195,6 +196,7 @@ export var ingredientSpecTable = [
     { name: 'とくせいカプセル', type: 'ノーマル', score: 40 },
     { name: 'ポイントマックス', type: 'ノーマル', score: 40 },
     { name: 'ポイントアップ', type: 'ノーマル', score: 38 },
+    { name: 'とくせいパッチ', type: 'ノーマル', score: 38 },
     { name: 'おまもりこばん', type: 'ノーマル', score: 32 },
     { name: 'アップグレード', type: 'ノーマル', score: 30 },
     { name: 'スピードパウダー', type: 'ノーマル', score: 28 },
@@ -229,6 +231,7 @@ export var ingredientSpecTable = [
     { name: 'こだわりメガネ', type: 'エスパー', score: 20 },
     { name: 'ひかりのねんど', type: 'エスパー', score: 20 },
     { name: 'パワーレンズ', type: 'エスパー', score: 20 },
+    { name: 'ガラナツリース', type: 'エスパー', score: 18 },
     { name: 'まがったスプーン', type: 'エスパー', score: 18 },
     { name: 'けいけんアメXL', type: 'エスパー', score: 10 },
     { name: 'スターのみ', type: 'エスパー', score: 10 },
@@ -288,7 +291,7 @@ export var ingredientSpecTable = [
     { name: 'カゴのみ', type: 'みず', score: 2 },
     { name: 'うしおのおこう', type: 'みず', score: 2 },
     { name: 'さざなみのおこう', type: 'みず', score: 2 },
-    { name: 'きぼんぐり', type: 'みず', score: 0 },
+    { name: 'あおぼんぐり', type: 'みず', score: 0 },
 ];
 // prettier-ignore
 export var standardProductTable = [
@@ -325,15 +328,17 @@ export var guaranteedProductRecipeTable = [
     { triggerIngredient: 'ほしのかけら', product: 'すいせいのかけら' },
     { triggerIngredient: 'ふしぎなアメ', product: 'とくせいカプセル' },
     { triggerIngredient: 'ぎんのおうかん', product: 'きんのおうかん' },
+    { triggerIngredient: 'ダイこうせき', product: 'ポイントアップ' },
+    { triggerIngredient: 'ヨロイこうせき', product: 'ポイントアップ' },
 ];
 export var ballProductRecipeTable = [
     {
         apricorn: 'くろぼんぐり',
         balls: [
-            { name: 'モンスターボール', rate: 6.25 },
-            { name: 'スーパーボール', rate: 6.25 },
-            { name: 'ダークボール', rate: 6.25 },
-            { name: 'ゴージャスボール', rate: 6.25 },
+            { name: 'モンスターボール', rate: 6.175 },
+            { name: 'スーパーボール', rate: 6.175 },
+            { name: 'ダークボール', rate: 6.175 },
+            { name: 'ゴージャスボール', rate: 6.175 },
             { name: 'ヘビーボール', rate: 0.25 },
             { name: 'サファリボール', rate: 0.025 },
             { name: 'コンペボール', rate: 0.025 },
@@ -342,10 +347,10 @@ export var ballProductRecipeTable = [
     {
         apricorn: 'あおぼんぐり',
         balls: [
-            { name: 'モンスターボール', rate: 6.25 },
-            { name: 'スーパーボール', rate: 6.25 },
-            { name: 'ダイブボール', rate: 6.25 },
-            { name: 'ネットボール', rate: 6.25 },
+            { name: 'モンスターボール', rate: 6.175 },
+            { name: 'スーパーボール', rate: 6.175 },
+            { name: 'ダイブボール', rate: 6.175 },
+            { name: 'ネットボール', rate: 6.175 },
             { name: 'ルアーボール', rate: 0.25 },
             { name: 'サファリボール', rate: 0.025 },
             { name: 'コンペボール', rate: 0.025 },
@@ -354,10 +359,10 @@ export var ballProductRecipeTable = [
     {
         apricorn: 'みどぼんぐり',
         balls: [
-            { name: 'モンスターボール', rate: 6.25 },
-            { name: 'スーパーボール', rate: 6.25 },
-            { name: 'ハイパーボール', rate: 6.25 },
-            { name: 'ネストボール', rate: 6.25 },
+            { name: 'モンスターボール', rate: 6.175 },
+            { name: 'スーパーボール', rate: 6.175 },
+            { name: 'ハイパーボール', rate: 6.175 },
+            { name: 'ネストボール', rate: 6.175 },
             { name: 'フレンドボール', rate: 0.25 },
             { name: 'サファリボール', rate: 0.025 },
             { name: 'コンペボール', rate: 0.025 },
@@ -366,10 +371,10 @@ export var ballProductRecipeTable = [
     {
         apricorn: 'ももぼんぐり',
         balls: [
-            { name: 'モンスターボール', rate: 6.25 },
-            { name: 'スーパーボール', rate: 6.25 },
-            { name: 'ハイパーボール', rate: 6.25 },
-            { name: 'ヒールボール', rate: 6.25 },
+            { name: 'モンスターボール', rate: 6.175 },
+            { name: 'スーパーボール', rate: 6.175 },
+            { name: 'ハイパーボール', rate: 6.175 },
+            { name: 'ヒールボール', rate: 6.175 },
             { name: 'ラブラブボール', rate: 0.25 },
             { name: 'サファリボール', rate: 0.025 },
             { name: 'コンペボール', rate: 0.025 },
@@ -378,10 +383,10 @@ export var ballProductRecipeTable = [
     {
         apricorn: 'あかぼんぐり',
         balls: [
-            { name: 'モンスターボール', rate: 6.25 },
-            { name: 'スーパーボール', rate: 6.25 },
-            { name: 'ハイパーボール', rate: 6.25 },
-            { name: 'リピートボール', rate: 6.25 },
+            { name: 'モンスターボール', rate: 6.175 },
+            { name: 'スーパーボール', rate: 6.175 },
+            { name: 'ハイパーボール', rate: 6.175 },
+            { name: 'リピートボール', rate: 6.175 },
             { name: 'レベルボール', rate: 0.25 },
             { name: 'サファリボール', rate: 0.025 },
             { name: 'コンペボール', rate: 0.025 },
@@ -390,10 +395,10 @@ export var ballProductRecipeTable = [
     {
         apricorn: 'しろぼんぐり',
         balls: [
-            { name: 'モンスターボール', rate: 6.25 },
-            { name: 'スーパーボール', rate: 6.25 },
-            { name: 'プレミアボール', rate: 6.25 },
-            { name: 'タイマーボール', rate: 6.25 },
+            { name: 'モンスターボール', rate: 6.175 },
+            { name: 'スーパーボール', rate: 6.175 },
+            { name: 'プレミアボール', rate: 6.175 },
+            { name: 'タイマーボール', rate: 6.175 },
             { name: 'スピードボール', rate: 0.25 },
             { name: 'サファリボール', rate: 0.025 },
             { name: 'コンペボール', rate: 0.025 },
@@ -402,10 +407,10 @@ export var ballProductRecipeTable = [
     {
         apricorn: 'きぼんぐり',
         balls: [
-            { name: 'モンスターボール', rate: 6.25 },
-            { name: 'スーパーボール', rate: 6.25 },
-            { name: 'ハイパーボール', rate: 6.25 },
-            { name: 'クイックボール', rate: 6.25 },
+            { name: 'モンスターボール', rate: 6.175 },
+            { name: 'スーパーボール', rate: 6.175 },
+            { name: 'ハイパーボール', rate: 6.175 },
+            { name: 'クイックボール', rate: 6.175 },
             { name: 'ムーンボール', rate: 0.25 },
             { name: 'サファリボール', rate: 0.025 },
             { name: 'コンペボール', rate: 0.025 },

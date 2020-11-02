@@ -95,10 +95,10 @@ describe('mixAccordingToBallRecipe', () => {
         'あおぼんぐり'
       )
     ).toEqual([
-      {name: 'モンスターボール', rate: 25},
-      {name: 'スーパーボール', rate: 25},
-      {name: 'ダイブボール', rate: 25},
-      {name: 'ネットボール', rate: 25},
+      {name: 'モンスターボール', rate: 24.7},
+      {name: 'スーパーボール', rate: 24.7},
+      {name: 'ダイブボール', rate: 24.7},
+      {name: 'ネットボール', rate: 24.7},
       {name: 'ルアーボール', rate: 1},
       {name: 'サファリボール', rate: 0.1},
       {name: 'コンペボール', rate: 0.1},
@@ -115,12 +115,12 @@ describe('mixAccordingToBallRecipe', () => {
       ).sort((a, b) => a.rate - b.rate)
     ).toEqual(
       [
-        {name: 'モンスターボール', rate: 25},
-        {name: 'スーパーボール', rate: 25},
-        {name: 'ダイブボール', rate: 12.5},
-        {name: 'ネットボール', rate: 12.5},
-        {name: 'ハイパーボール', rate: 12.5},
-        {name: 'リピートボール', rate: 12.5},
+        {name: 'モンスターボール', rate: 24.7},
+        {name: 'スーパーボール', rate: 24.7},
+        {name: 'ダイブボール', rate: 12.35},
+        {name: 'ネットボール', rate: 12.35},
+        {name: 'ハイパーボール', rate: 12.35},
+        {name: 'リピートボール', rate: 12.35},
         {name: 'ルアーボール', rate: 0.5},
         {name: 'レベルボール', rate: 0.5},
         {name: 'サファリボール', rate: 0.1},
