@@ -1,6 +1,6 @@
 {
   "name": "uurobo",
-  "version": "0.0.16",
+  "version": "0.0.17",
   "description": "",
   "private": true,
   "main": "dist-cjs/index.js",
@@ -8,16 +8,24 @@
   "types": "dist-cjs/index.d.ts",
   "scripts": {
     "test": "jest --watch-all",
-    "build": "npm run build:esm && npm run build:cjs",
+    "build": "npm-run-all -s build:cjs build:esm",
     "build:cjs": "tsc --project . --module commonjs --outDir ./dist-cjs",
-    "build:esm": "tsc --project . --module es2015 --outDir ./dist-esm"
+    "build:esm": "tsc --project . --module es2015 --outDir ./dist-esm",
+    "prebuild": "rimraf ./dist-*",
+    "prepare": "npm run build"
   },
   "keywords": [],
   "author": "srymh",
   "license": "MIT",
+  "files": [
+    "/dist-cjs",
+    "/dist-esm"
+  ],
   "devDependencies": {
     "@types/jest": "^26.0.14",
     "jest": "^26.5.2",
+    "npm-run-all": "^4.1.5",
+    "rimraf": "^3.0.2",
     "ts-jest": "^26.4.1",
     "typescript": "^4.0.3"
   }
